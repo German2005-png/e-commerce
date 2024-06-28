@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import xIcon from "../../../public/svg/x.svg";
 
 export function ContCart({onContCart, setContCart, products, allProducts, setAllProducts, plusPrCart, minusPrCart}) {
+  const [totalPrice, setTotalPrice] = useState(0);
   useEffect(()=>{
     setTimeout(()=>{
       if(onContCart){
@@ -17,6 +18,16 @@ export function ContCart({onContCart, setContCart, products, allProducts, setAll
     txt = txt.replaceAll(" ", "-");
     return txt
   }
+  useEffect(()=>{
+    const allPrice = allProducts.map((item)=> item.price * item.amount);
+    if(allProducts.length > 0){
+      const PlusPrice = allPrice.reduce((total, curretValue)=> total + curretValue + 0);
+      setTotalPrice(Math.round(PlusPrice));
+    }
+    if(allProducts.length === 0){
+      setTotalPrice(0)
+    }
+  },[allProducts])
   return (
     <div className="flex-cont-cart">
       <div className="content-cart">
@@ -52,6 +63,10 @@ export function ContCart({onContCart, setContCart, products, allProducts, setAll
             </li>
           ))}
         </ul>
+        <div className='cont-total-price'>
+          <h4 className='total-price-title'>TOTAL:</h4>
+          <span className='total-price'>${totalPrice} USD</span>
+        </div>
         <form className='cart-form'>
             <button className='cart-form-btn'>Buy Products</button>
         </form>
