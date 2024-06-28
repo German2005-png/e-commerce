@@ -634,3 +634,18 @@ main{
     font-weight: 700;
     font-size: 18px;
 }
+
+.cont-total-price{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 15px;
+}
+
+.total-price-title{
+    color: #ff6219;
+}
+
+.total-price{
+    font-weight: 600;
+}
